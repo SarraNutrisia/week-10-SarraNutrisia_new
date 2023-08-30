@@ -1,0 +1,84 @@
+openapi: 3.0.0
+info:
+  title: Transfer Request Management API
+  version: 1.0.0
+  description: Transfer Request Management API dengan Express JS
+servers:
+  - url: http://localhost:3005
+    description: Development server
+components:
+  schemas:
+    RegisterUser:
+      type: object
+      properties: 
+        username:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+    LoginUser:
+      type: object
+      properties: 
+        username:
+          type: string
+        password:
+          type: string
+       
+paths: 
+  /auth/register:
+    post:
+      summary: 'Register user baru'
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUser'
+      responses:
+        '200':
+          description: 'User created successfully'
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: 'An error occured'
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /auth/login:
+    post: 
+      summary: 'Login user'
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUser'
+      responses:
+        '200':
+          description: 'Login successfull'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: string
+        '500':
+          description: 'An error occured'
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
